@@ -34,3 +34,5 @@
 *~
 nbproject/
 ?
+moc_*.*
+*.html
