@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="data"
+                   displayName="data"
+                   projectFiles="true"
+                   root="/usr/lib64/qt5/mkspecs/features/data">
+      <itemPath>/usr/lib64/qt5/mkspecs/features/data/dummy.cpp</itemPath>
+    </logicalFolder>
+    <df root="." name="0">
+      <in>AddBox.cc</in>
+      <in>App.cc</in>
+      <in>Dictor.cc</in>
+      <in>Forvo.cc</in>
+      <in>GDrive.cc</in>
+      <in>Lingvo.cc</in>
+      <in>OnlineDict.cc</in>
+      <in>Proc.cc</in>
+      <in>Promt.cc</in>
+      <in>QForvoLineEdit.cc</in>
+      <in>TDict.cc</in>
+      <in>TWord.cc</in>
+      <in>TestBox.cc</in>
+      <in>main.cc</in>
+      <in>moc_AddBox.cpp</in>
+      <in>moc_App.cpp</in>
+      <in>moc_Dictor.cpp</in>
+      <in>moc_Forvo.cpp</in>
+      <in>moc_GDrive.cpp</in>
+      <in>moc_Lingvo.cpp</in>
+      <in>moc_OnlineDict.cpp</in>
+      <in>moc_Promt.cpp</in>
+      <in>moc_QForvoLineEdit.cpp</in>
+      <in>moc_TestBox.cpp</in>
+      <in>moc_myhttpserver.cpp</in>
+      <in>myhttpserver.cc</in>
+      <in>sigwatch.cpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-std=c++11 -O2"/>
+        <element flagsID="1" commonFlags="-std=c++11 -O2 -fPIC"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>Dict</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>.</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="/usr/lib64/qt5/mkspecs/features/data/dummy.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="AddBox.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="App.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="Dictor.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="Forvo.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="GDrive.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="Lingvo.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="OnlineDict.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="Proc.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="Promt.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="QForvoLineEdit.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="TDict.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="TWord.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="TestBox.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <folder path="0">
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/qt5</pElem>
+            <pElem>/usr/include/qt5/QtWebKitWidgets</pElem>
+            <pElem>/usr/include/qt5/QtWebKit</pElem>
+            <pElem>/usr/include/qt5/QtWebEngineWidgets</pElem>
+            <pElem>/usr/include/qt5/QtPrintSupport</pElem>
+            <pElem>/usr/include/qt5/QtWidgets</pElem>
+            <pElem>/usr/include/qt5/QtWebEngine</pElem>
+            <pElem>/usr/include/qt5/QtWebEngineCore</pElem>
+            <pElem>/usr/include/qt5/QtQuick</pElem>
+            <pElem>/usr/include/qt5/QtGui</pElem>
+            <pElem>/usr/include/qt5/QtWebChannel</pElem>
+            <pElem>/usr/include/qt5/QtQml</pElem>
+            <pElem>/usr/include/qt5/QtNetwork</pElem>
+            <pElem>/usr/include/qt5/QtXml</pElem>
+            <pElem>/usr/include/qt5/QtPositioning</pElem>
+            <pElem>/usr/include/qt5/QtCore</pElem>
+            <pElem>/usr/lib64/qt5/mkspecs/linux-g++</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>QT_CORE_LIB</Elem>
+            <Elem>QT_GUI_LIB</Elem>
+            <Elem>QT_NETWORK_LIB</Elem>
+            <Elem>QT_NO_DEBUG</Elem>
+            <Elem>QT_POSITIONING_LIB</Elem>
+            <Elem>QT_PRINTSUPPORT_LIB</Elem>
+            <Elem>QT_QML_LIB</Elem>
+            <Elem>QT_QUICK_LIB</Elem>
+            <Elem>QT_WEBCHANNEL_LIB</Elem>
+            <Elem>QT_WEBENGINECORE_LIB</Elem>
+            <Elem>QT_WEBENGINEWIDGETS_LIB</Elem>
+            <Elem>QT_WEBENGINE_LIB</Elem>
+            <Elem>QT_WEBKITWIDGETS_LIB</Elem>
+            <Elem>QT_WEBKIT_LIB</Elem>
+            <Elem>QT_WIDGETS_LIB</Elem>
+            <Elem>QT_XML_LIB</Elem>
+            <Elem>_REENTRANT</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+      <item path="main.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_AddBox.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_App.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_Dictor.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_Forvo.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_GDrive.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_Lingvo.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_OnlineDict.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_Promt.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_QForvoLineEdit.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_TestBox.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="moc_myhttpserver.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="myhttpserver.cc" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="sigwatch.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

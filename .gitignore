@@ -1,38 +1,21 @@
-# Prerequisites
-*.d
+*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+!*.cc
+!*.cpp
+!*.h
+!*.hh
+!*.hpp
 
-# Precompiled Headers
-*.gch
-*.pch
+!.gitignore
+!README.md
+!run_x2go.sh
+!Dict.pro
+!LICENSE
+!Makefile
+!nbproject
+!nbproject/*
+!nbproject/private
+!nbproject/private/*
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-*~
-nbproject/
-?
 moc_*.*
-*.html
+
