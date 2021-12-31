@@ -1,0 +1,1 @@
+./Dict --disable-gpu
