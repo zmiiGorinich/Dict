@@ -172,7 +172,7 @@ DictApp::DictApp(QWidget *parent): QWidget(parent), fEditEntry(NULL),
    QComboBox *comboDicts = new QComboBox;
    comboDicts->setInsertPolicy(QComboBox::NoInsert);
    comboDicts->setEditable(false);
-   comboDicts->addItem(qstr("Promt"));
+//   comboDicts->addItem(qstr("Promt"));
    comboDicts->addItem(qstr("Lingvo"));
    comboDicts->setCurrentIndex(0);
 

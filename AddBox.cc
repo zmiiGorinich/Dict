@@ -1,5 +1,5 @@
 #include"AddBox.h"
-#include"Promt.h"
+
 #include"Lingvo.h"
 #include<string>
 #include"StrStr.h"
@@ -54,7 +54,7 @@ AddBox::AddBox(QWidget * parent): QWidget(parent){
    
    // connect(this,SIGNAL(waitForNetRequest()),this,SLOT(onWaitForNetRequest()));
    // connect(this,SIGNAL(netRequestReceived()),this,SLOT(onNetRequestReceived()));
-   fOnlineDictName = "Promt";
+   fOnlineDictName = "Lingvo";
 }
 
 void AddBox::cancel(){
@@ -125,7 +125,7 @@ void AddBox::reFetch()
 {
    OnlineDict * q;
    if(fOnlineDictName == "Lingvo") q = new Lingvo;
-   else if(fOnlineDictName == "Promt") q = new Promt;
+//   else if(fOnlineDictName == "Promt") q = new Promt;
    else {
       cerr<<"Wrong OnlineDictName "<<fOnlineDictName<<" !"<<endl;
       return;

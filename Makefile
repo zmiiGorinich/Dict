@@ -16,7 +16,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_WEBKIT_LIB -DQT_WEBENGINEWIDGETS_LIB -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_WEBENGINE_LIB -DQT_WEBENGINECORE_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_WEBCHANNEL_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_POSITIONING_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -std=c++11 -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -std=c++17 -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWebKitWidgets -isystem /usr/include/qt5/QtWebKit -isystem /usr/include/qt5/QtWebEngineWidgets -isystem /usr/include/qt5/QtPrintSupport -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtWebEngine -isystem /usr/include/qt5/QtWebEngineCore -isystem /usr/include/qt5/QtQuick -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtWebChannel -isystem /usr/include/qt5/QtQml -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtXml -isystem /usr/include/qt5/QtPositioning -isystem /usr/include/qt5/QtCore -I. -I/usr/lib64/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib64/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -59,7 +59,6 @@ SOURCES       = AddBox.cc \
 		main.cc \
 		OnlineDict.cc \
 		Proc.cc \
-		Promt.cc \
 		QForvoLineEdit.cc \
 		sigwatch.cpp \
 		TDict.cc \
@@ -72,7 +71,6 @@ SOURCES       = AddBox.cc \
 		moc_Forvo.cpp \
 		moc_Lingvo.cpp \
 		moc_OnlineDict.cpp \
-		moc_Promt.cpp \
 		moc_QForvoLineEdit.cpp \
 		moc_TestBox.cpp \
 		moc_myhttpserver.cpp \
@@ -85,7 +83,6 @@ OBJECTS       = AddBox.o \
 		main.o \
 		OnlineDict.o \
 		Proc.o \
-		Promt.o \
 		QForvoLineEdit.o \
 		sigwatch.o \
 		TDict.o \
@@ -99,7 +96,6 @@ OBJECTS       = AddBox.o \
 		moc_Forvo.o \
 		moc_Lingvo.o \
 		moc_OnlineDict.o \
-		moc_Promt.o \
 		moc_QForvoLineEdit.o \
 		moc_TestBox.o \
 		moc_myhttpserver.o \
@@ -273,6 +269,7 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -296,7 +293,6 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		Forvo.h \
 		Lingvo.h \
 		OnlineDict.h \
-		Promt.h \
 		QForvoLineEdit.h \
 		sigwatch.h \
 		StrStr.h \
@@ -312,7 +308,6 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		main.cc \
 		OnlineDict.cc \
 		Proc.cc \
-		Promt.cc \
 		QForvoLineEdit.cc \
 		sigwatch.cpp \
 		TDict.cc \
@@ -500,6 +495,7 @@ Makefile: Dict.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 		/usr/lib64/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib64/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib64/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib64/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib64/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib64/qt5/mkspecs/features/default_pre.prf \
@@ -688,6 +684,7 @@ Makefile: Dict.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/mk
 /usr/lib64/qt5/mkspecs/features/qt_config.prf:
 /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib64/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib64/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib64/qt5/mkspecs/features/toolchain.prf:
 /usr/lib64/qt5/mkspecs/features/default_pre.prf:
@@ -722,8 +719,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents AddBox.h App.h Forvo.h Lingvo.h OnlineDict.h Promt.h QForvoLineEdit.h sigwatch.h StrStr.h TDict.h TestBox.h TWord.h myhttpserver.h GDrive.h Dictor.h $(DISTDIR)/
-	$(COPY_FILE) --parents AddBox.cc App.cc Forvo.cc Lingvo.cc main.cc OnlineDict.cc Proc.cc Promt.cc QForvoLineEdit.cc sigwatch.cpp TDict.cc TestBox.cc TWord.cc myhttpserver.cc GDrive.cc Dictor.cc $(DISTDIR)/
+	$(COPY_FILE) --parents AddBox.h App.h Forvo.h Lingvo.h OnlineDict.h QForvoLineEdit.h sigwatch.h StrStr.h TDict.h TestBox.h TWord.h myhttpserver.h GDrive.h Dictor.h $(DISTDIR)/
+	$(COPY_FILE) --parents AddBox.cc App.cc Forvo.cc Lingvo.cc main.cc OnlineDict.cc Proc.cc QForvoLineEdit.cc sigwatch.cpp TDict.cc TestBox.cc TWord.cc myhttpserver.cc GDrive.cc Dictor.cc $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -753,11 +750,11 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -std=c++11 -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -std=c++17 -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_AddBox.cpp moc_App.cpp moc_Forvo.cpp moc_Lingvo.cpp moc_OnlineDict.cpp moc_Promt.cpp moc_QForvoLineEdit.cpp moc_sigwatch.cpp moc_TestBox.cpp moc_myhttpserver.cpp moc_GDrive.cpp moc_Dictor.cpp
+compiler_moc_header_make_all: moc_AddBox.cpp moc_App.cpp moc_Forvo.cpp moc_Lingvo.cpp moc_OnlineDict.cpp moc_QForvoLineEdit.cpp moc_sigwatch.cpp moc_TestBox.cpp moc_myhttpserver.cpp moc_GDrive.cpp moc_Dictor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_AddBox.cpp moc_App.cpp moc_Forvo.cpp moc_Lingvo.cpp moc_OnlineDict.cpp moc_Promt.cpp moc_QForvoLineEdit.cpp moc_sigwatch.cpp moc_TestBox.cpp moc_myhttpserver.cpp moc_GDrive.cpp moc_Dictor.cpp
+	-$(DEL_FILE) moc_AddBox.cpp moc_App.cpp moc_Forvo.cpp moc_Lingvo.cpp moc_OnlineDict.cpp moc_QForvoLineEdit.cpp moc_sigwatch.cpp moc_TestBox.cpp moc_myhttpserver.cpp moc_GDrive.cpp moc_Dictor.cpp
 moc_AddBox.cpp: AddBox.h \
 		TDict.h \
 		TWord.h \
@@ -791,14 +788,6 @@ moc_OnlineDict.cpp: OnlineDict.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/dymov/Dict/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/dymov/Dict -I/home/dymov/Dict -I/usr/include/qt5 -I/usr/include/qt5/QtWebKitWidgets -I/usr/include/qt5/QtWebKit -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtWebEngine -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtXml -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/c++/7/x86_64-suse-linux -I/usr/include/c++/7/backward -I/usr/lib64/gcc/x86_64-suse-linux/7/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-suse-linux/7/include-fixed -I/usr/x86_64-suse-linux/include -I/usr/include OnlineDict.h -o moc_OnlineDict.cpp
-
-moc_Promt.cpp: Promt.h \
-		OnlineDict.h \
-		TDict.h \
-		TWord.h \
-		moc_predefs.h \
-		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/dymov/Dict/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/dymov/Dict -I/home/dymov/Dict -I/usr/include/qt5 -I/usr/include/qt5/QtWebKitWidgets -I/usr/include/qt5/QtWebKit -I/usr/include/qt5/QtWebEngineWidgets -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtWebEngine -I/usr/include/qt5/QtWebEngineCore -I/usr/include/qt5/QtQuick -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtWebChannel -I/usr/include/qt5/QtQml -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtXml -I/usr/include/qt5/QtPositioning -I/usr/include/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/c++/7/x86_64-suse-linux -I/usr/include/c++/7/backward -I/usr/lib64/gcc/x86_64-suse-linux/7/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-suse-linux/7/include-fixed -I/usr/x86_64-suse-linux/include -I/usr/include Promt.h -o moc_Promt.cpp
 
 moc_QForvoLineEdit.cpp: QForvoLineEdit.h \
 		moc_predefs.h \
@@ -853,9 +842,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 AddBox.o: AddBox.cc AddBox.h \
 		TDict.h \
 		TWord.h \
-		Promt.h \
-		OnlineDict.h \
 		Lingvo.h \
+		OnlineDict.h \
 		StrStr.h \
 		QForvoLineEdit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AddBox.o AddBox.cc
@@ -895,13 +883,6 @@ OnlineDict.o: OnlineDict.cc OnlineDict.h \
 
 Proc.o: Proc.cc 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Proc.o Proc.cc
-
-Promt.o: Promt.cc Promt.h \
-		OnlineDict.h \
-		TDict.h \
-		TWord.h \
-		StrStr.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Promt.o Promt.cc
 
 QForvoLineEdit.o: QForvoLineEdit.cc QForvoLineEdit.h \
 		StrStr.h \
@@ -953,9 +934,6 @@ moc_Lingvo.o: moc_Lingvo.cpp
 
 moc_OnlineDict.o: moc_OnlineDict.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_OnlineDict.o moc_OnlineDict.cpp
-
-moc_Promt.o: moc_Promt.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Promt.o moc_Promt.cpp
 
 moc_QForvoLineEdit.o: moc_QForvoLineEdit.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_QForvoLineEdit.o moc_QForvoLineEdit.cpp

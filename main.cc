@@ -8,6 +8,7 @@
 #include <QtWebEngine/QtWebEngine>
 #include "sigwatch.h"
 #include "myhttpserver.h"
+#include <unistd.h>
 
 using namespace std;
 int main(int argv, char **args)
@@ -27,7 +28,7 @@ int main(int argv, char **args)
 
 
    QObject::connect(&sigwatch, SIGNAL(unixSignal(int)), &dapp, SLOT(close()));
-
+   
    //   dapp.show();
    int ret= app.exec();
    return ret;

@@ -1,14 +1,16 @@
 #ifndef OnlineDict_h
 #define OnlineDict_h
+
 #include<QObject>
 #include<QString>
-
+#include<string>
 #include"TDict.h"
 
 class QNetworkAccessManager;
 class QNetworkReply;
 class TDictEntry;
 class QWebElement;
+class QTcpSocket;
 
 class OnlineDict;
 class dictElementParser: public QObject {
@@ -20,7 +22,7 @@ public:
     dictElementParser(OnlineDict *);
     TDictEntry   fEnt;
     virtual ~dictElementParser();
-    virtual void parseElement(const QWebElement&) = 0;
+    virtual void parseElement(QString ) = 0;
     bool isDone() const { return fDone;}
     bool ok() const { return fOK;}
     void setOK(bool ok) { fOK = ok;}
@@ -31,8 +33,8 @@ signals:
 class OnlineDict: public QObject {
     Q_OBJECT
 protected:
-    static QNetworkAccessManager *manager ;
-    QNetworkReply *fReply;
+    QTcpSocket * socket = nullptr; // Managed by Qt through parent object
+
     std::list<dictElementParser*> fCF;
     QString fQuery;
     std::list<dictElementParser *>::iterator getMatchIterator();
@@ -43,9 +45,8 @@ public:
     virtual void fetch(QString queue) = 0;
     TDictEntry *getMatch() ;
     std::list<TDictEntry *> getAll();
-    static QNetworkAccessManager *networkManager();
+
 public slots:
-    virtual void replyFinished() = 0;
     virtual void parserDone();
 signals:
     void ready(OnlineDict *);

@@ -9,16 +9,15 @@ INCLUDEPATH += . /usr/include/qt5
 # Input
 QT += webkit webkitwidgets xml webengine webenginewidgets
 CONFIG += release
-CONFIG += -std=c++11
+CONFIG += -std=c++17
 LIBS += -licuuc
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++17
 
 HEADERS += AddBox.h \
            App.h \
            Forvo.h \
            Lingvo.h \
            OnlineDict.h \
-           Promt.h \
            QForvoLineEdit.h \
            sigwatch.h \
            StrStr.h \
@@ -35,7 +34,6 @@ SOURCES += AddBox.cc \
            main.cc \
            OnlineDict.cc \
            Proc.cc \
-           Promt.cc \
            QForvoLineEdit.cc \
            sigwatch.cpp \
            TDict.cc \
