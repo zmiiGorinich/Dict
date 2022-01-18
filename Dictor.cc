@@ -225,7 +225,7 @@ void Dictor::showWebPageForLabel(string tag){
 
    ofstream ofs("page.html");
    ofs<<HTML.toUtf8().constData()<<flush;
-   system("chromium page.html &");
+   system("firefox page.html &");
 
    // view->setHtml(HTML);
    // view->show();
