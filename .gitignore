@@ -12,10 +12,6 @@
 !Dict.pro
 !LICENSE
 !Makefile
-!nbproject
-!nbproject/*
-!nbproject/private
-!nbproject/private/*
 
 moc_*.*
 
