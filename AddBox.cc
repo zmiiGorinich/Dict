@@ -203,7 +203,9 @@ void AddPage::fillEditFields()
 {
    cout<<"FEF "<<fEntry<<endl;
    int id = fEntry.words().first->partOfSpeech();
-   if(id != TWord::eNoun && id != TWord::eVerb) id = TWord::eOther;
+   if(id != TWord::eNoun && id != TWord::eVerb && id != TWord::eAdjective)
+       id = TWord::eOther;
+   
    cout<<"Id "<<id<<' '<<endl;
    grPOS->button(id)->setChecked(true);
 
@@ -295,6 +297,7 @@ AddPage::AddPage(QWidget * parent): QWidget(parent), fNewlyFetched(false){
    grPOS = new QButtonGroup;
    grPOS->addButton(new QRadioButton(QString::fromUtf8("Сущ.")), TWord::eNoun);
    grPOS->addButton(new QRadioButton(QString::fromUtf8("Глагол")), TWord::eVerb);
+   grPOS->addButton(new QRadioButton(QString::fromUtf8("Прил.")), TWord::eAdjective);
    grPOS->addButton(new QRadioButton(QString::fromUtf8("Другое")), TWord::eOther);
    QHBoxLayout *layPOS = new QHBoxLayout;
    for(int i = 0; i < grPOS->buttons().size(); i++){

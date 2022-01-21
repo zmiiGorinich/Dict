@@ -7,9 +7,13 @@ class LingvoCardParser: public dictElementParser{
    Q_OBJECT
 
    void fetchVerbForms();
-public:
-   LingvoCardParser(OnlineDict * dict): dictElementParser(dict){}
+   QString parsePartOfSpeach(const QString &);
+   int parseWordForms(const QStringList &);
+   void parseTranslations(QStringList &);
    QString fDictName;
+public:
+    const QString & dictName() const { return fDictName;}
+    LingvoCardParser(OnlineDict * dict): dictElementParser(dict){}
    ~LingvoCardParser(){}
    void parseElement(QString );
 public slots:

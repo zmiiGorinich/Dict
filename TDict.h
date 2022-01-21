@@ -24,6 +24,8 @@ public:
    TDictEntry(const TDictEntry&);
    void setWords(const TWord & w1, const TWord & w2);
    const std::pair<TWord *, TWord *> & words() const{ return fW;}
+   TWord * de() const { return fW.first;}
+   TWord * ru() const { return fW.second;}
    void setTags(const std::string & a) ;
    float rate() const { return (fNumTries > 0 ? float(fNumSuccess) / fNumTries : 0);}
    int nSuccess() const {return fNumSuccess;}

@@ -8,8 +8,8 @@ class TWord
    std::string fData;
    std::string fForms;
    std::string fGrammarInfo;
-   int fPartOfSpeech;
-   int fLang;
+   int fPartOfSpeech = eMaxPartOfSpeech;
+   int fLang = eMaxLang;
 public:
    enum {eMasculine, eFeminine, eNeutral};
    enum {eRu, eDe, eMaxLang};

@@ -132,7 +132,6 @@ DictApp::DictApp(QWidget *parent): QWidget(parent), fEditEntry(NULL),
 	   this,SLOT(checkExistingWordFetched(const TDictEntry&)));
    connect(this,SIGNAL(addToAddBox(const TDictEntry*)),
 	   fAddBox,SLOT(addToAddBox(const TDictEntry*)));
-   connect(fAddBox, SIGNAL(updateStatusLine(const char *)), this, SLOT(updateStatus(const char *)));
 
    //////////////////////////////////////////////////////////////////////////////////
    QHBoxLayout *taglayout = new QHBoxLayout;
