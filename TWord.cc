@@ -33,15 +33,18 @@ TWord::read(std::istream & ist)
 
 }
 
-
+#include<regex>
 /////////////////////////////////////////////////////////////////
 vector<string>
 TWord::showTable() const
 {
-    vector<string> ret(3);
+    vector<string> ret(4);
     ret[1] = fData;
+
     if(fLang == eDe)
     {
+        ret[2] = fForms;
+
         if(fPartOfSpeech == eNoun)
         {
             ret[0] = nounArticle();
@@ -49,8 +52,19 @@ TWord::showTable() const
         else if(fPartOfSpeech == eVerb)
         {
             ret[0] = fGrammarInfo;
+            auto pos = fForms.find('+');
+            if(pos != fForms.npos)
+            {
+                ret[2] = fForms.substr(0, pos);
+                ret[2] = regex_replace(ret[2],std::regex("sich"),"");
+                ret[2] = regex_replace(ret[2],std::regex("mich"),"");
+                ret[2] = regex_replace(ret[2],std::regex("dich"),"");
+                ret[2] = regex_replace(ret[2],std::regex("^[ \t]+|[ \t]+$"),"");
+
+      
+                ret[3] = fForms.substr(pos);
+            }
         }
-        ret[2] = fForms;
     }
 
     return ret;
@@ -64,27 +78,23 @@ TWord::show() const
     if(fLang != eDe) return fData;
 
     string str;
+    auto tab = showTable();
+
+    str += tab[0];
+    if(tab[0].length() > 1) str += " ";
+
+    str += tab[1];
+
     if(fPartOfSpeech == eNoun)
     {
-        if(!nounArticle().empty())
-            str += nounArticle() + " ";
-        str += fData;
-        str += "  ";
-        str += fForms;
+        if(!fForms.empty()) str += " <" + fForms + ">";
     }
     else if(fPartOfSpeech == eVerb)
     {
-        if(!fGrammarInfo.empty()) str += fGrammarInfo + "  ";
-        str += fData;
-        if(!fForms.empty())
-        {
-            str += "  ";
-            if(fForms[0] != '(') str += "(";
-            str += fForms;
-            if(fForms[fForms.length() - 1] != ')') str += ")";
-        }
+        if(!tab[2].empty()) str += " (" + tab[2] + ")";
+        if(!tab[3]. empty()) str += " " + tab[3];
     }
-    else str = fData + (fForms.empty() ? "" : " " + fForms);
+    else if(!tab[2].empty()) str += " " + tab[2];
     return str;
 }
 
