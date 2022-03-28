@@ -3,6 +3,7 @@
 #include"OnlineDict.h"
 #include<QAbstractSocket>
 
+class QNetworkReply;
 class LingvoCardParser: public dictElementParser{
    Q_OBJECT
 
@@ -11,6 +12,7 @@ class LingvoCardParser: public dictElementParser{
    int parseWordForms(const QStringList &);
    void parseTranslations(QStringList &);
    QString fDictName;
+   QNetworkReply * fReply = nullptr;
 public:
     const QString & dictName() const { return fDictName;}
     LingvoCardParser(OnlineDict * dict): dictElementParser(dict){}
@@ -36,7 +38,6 @@ public slots:
    void disconnected();
    void bytesWritten(qint64 bytes);
    void readyRead();
-
 };
 
 #endif

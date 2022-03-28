@@ -9,6 +9,7 @@ using namespace std;
 using icu::UnicodeString;
 OnlineDict::OnlineDict()
 {
+    if(!gNetworkMagnager) gNetworkMagnager = new QNetworkAccessManager();
 }
 
 OnlineDict::~OnlineDict()
@@ -73,6 +74,9 @@ OnlineDict::parserDone()
     cout << "AllPD!" << fCF.size() << endl;
     emit ready(this);
 }
+
+QNetworkAccessManager *OnlineDict::gNetworkMagnager = nullptr;
+
 
 dictElementParser::dictElementParser(OnlineDict *dict): fDone(false), fOK(true)
 {

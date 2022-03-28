@@ -10,6 +10,10 @@
 #include"TWord.h"
 #include <QStringList>
 #include <qt5/QtCore/qchar.h>
+#include <QWebPage>
+#include <QWebElement>
+#include <QWebFrame>
+
 using namespace std;
 
 void
@@ -51,6 +55,8 @@ Lingvo::connected()
 
     // Hey server, tell me about you.
     fGotReply = false;
+    const char startLine[] = "KVN\n";
+    socket->write(startLine);
     socket->write(("https://www.lingvolive.com/en-us/translate/de-ru/" + fQuery).toUtf8());
     const char endLine[] = "\nEOF\n";
     socket->write(endLine);
@@ -547,7 +553,7 @@ LingvoCardParser::parseTranslations(QStringList & lst)
 void
 LingvoCardParser::parseElement(QString art)
 {
-    fDone = true;
+    fDone = false;
 
     // Break article into lines
     auto lines = art.split('\n',  QString::SkipEmptyParts);
@@ -600,7 +606,7 @@ LingvoCardParser::parseElement(QString art)
 
     // Extract forms
     int formLine = parseWordForms(lines);
-
+    
     // Extract translations
     QStringList translation;
     if(!posLeftOver.isEmpty()) translation += posLeftOver;
@@ -610,47 +616,56 @@ LingvoCardParser::parseElement(QString art)
 
     
     cout << fEnt << endl;
-    fDone = true;
-    emit ready();
+    if(fEnt.de()->partOfSpeech() == TWord::eVerb) 
+    {
+        fetchVerbForms();
+    } 
+    else 
+    {
+        fDone = true;
+        emit ready();
+    }
 }
 
 void
 LingvoCardParser::fetchVerbForms()
 {
-    QString req = "http://www.verbformen.com/conjugation/" +
-        qstr(fEnt.de()->data()) + ".htm";
-//    fReply = OnlineDict::networkManager()->get(QNetworkRequest(QUrl(req)));
-//    connect(fReply, SIGNAL(finished()), this, SLOT(replyFinished()));
-    cout << "VerbForms Start " << req << endl;
+    QString req = "https://www.verbformen.com/conjugation/?w=" +
+        qstr(fEnt.de()->data());
+    fReply = OnlineDict::networkManager()->get(QNetworkRequest(QUrl(req)));
+    connect(fReply, SIGNAL(finished()), this, SLOT(replyFinished()));
+    cout << "*************************************** VerbForms Start " << req << endl;
+    
 }
 
 void
 LingvoCardParser::replyFinished()
 {
-    cout << "VerbForms reply finished" << endl;
+    cout << "*************************************** VerbForms reply finished" << endl;
     fDone = true;
-//    QString HTML = QString::fromUtf8(fReply->readAll().constData());
-//    fReply->disconnect();
-//    fReply->deleteLater();
-//
-//    ofstream ofs("VerbForms.html");
-//    ofs << HTML << endl;
-//
-//    QWebPage wpage;
-//    wpage.mainFrame()->setHtml(HTML);
-//    QWebElement doc = wpage.mainFrame()->documentElement();
-//    QWebElement unbekant = doc.findFirst("div.einstellung-warnhinweis");
-//    cout << "Unbek " << unbekant.isNull() << '|' << unbekant.toPlainText() << '|' << endl;
-//    if(!unbekant.isNull() && unbekant.toPlainText().contains("verbtabelle.unbekanntes_verb"))
-//    {
-//        emit ready();
-//        return;
-//    }
-//    QString title = doc.findFirst("head").findFirst("title").toPlainText();
-//    title = title.section("-", 1, 2).trimmed();
-//    cout << "Title :" << title << endl;
-//    fEnt.de()->setForms(str(title));
+    QString HTML = QString::fromUtf8(fReply->readAll().constData());
+    fReply->disconnect();
+    fReply->deleteLater();
+
+    ofstream ofs("VerbForms.html");
+    ofs << HTML << endl;
+
+    QWebPage wpage;
+    wpage.mainFrame()->setHtml(HTML);
+    QWebElement doc = wpage.mainFrame()->documentElement();
+    QWebElement formsEl = doc.findFirst("#stammformen");
+    ofs<<"FFFFFORMS: "<<formsEl.toPlainText()<<endl;
+
+    QString formsStr = formsEl.toPlainText();
+    QString res =  formsStr.section("·",0,0).trimmed();
+    res += ", ";
+    res += formsStr.section("·",1,1).trimmed();
+    res += " - ";
+    res += formsStr.section("·",2,2).trimmed();
+    fEnt.de()->setForms(str(res));
     cout << "With verbFormen:" << fEnt << endl;
+    
+    fDone = true;
     emit ready();
 }
 

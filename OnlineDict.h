@@ -38,14 +38,14 @@ protected:
     std::list<dictElementParser*> fCF;
     QString fQuery;
     std::list<dictElementParser *>::iterator getMatchIterator();
-
+    static QNetworkAccessManager *gNetworkMagnager;
 public:
     OnlineDict();
     virtual ~OnlineDict();
     virtual void fetch(QString queue) = 0;
     TDictEntry *getMatch() ;
     std::list<TDictEntry *> getAll();
-
+    static QNetworkAccessManager *networkManager() { return gNetworkMagnager;}
 public slots:
     virtual void parserDone();
 signals:
