@@ -67,8 +67,15 @@ void GDrive::Start()
 
 void GDrive::checkExpireTime()
 {
-   cout << "GDrive::checkExpireTime() " << accessTokenExpireTime()
-        << ' ' << QDateTime::currentDateTimeUtc().toTime_t() << endl;
+   cout << "GDrive::checkExpireTime() " <<setprecision(12)<< accessTokenExpireTime()
+        << ' ' << QDateTime::currentDateTimeUtc().toTime_t()
+        << ' ' << QDateTime::currentDateTime().toTime_t()
+	<< ' ' << QDateTime::currentSecsSinceEpoch()  
+	<<" Left: "<<(long int)(QDateTime::currentDateTimeUtc().toTime_t()) - accessTokenExpireTime()<< endl;
+   time_t t0 =   QDateTime::currentDateTimeUtc().toTime_t();
+   time_t t1 =   QDateTime::currentDateTime().toTime_t();
+   time_t t2 =   QDateTime::currentSecsSinceEpoch();
+   cout<<ctime(&t0)<<ctime(&t1)<<ctime(&t2);
    if(accessTokenExpireTime() <= QDateTime::currentDateTimeUtc().toTime_t()) {
       requestNewAccessToken();
    } else emit(authorizationObtained());
@@ -94,6 +101,7 @@ void  GDrive::query(const QString& query){
       loop.exec();
    }
 }
+
 void  GDrive::read(const QString& filename){
    fIntermediateOperation=true;
    connect(this, SIGNAL(intermediateOperationFinished()), this, SLOT(readFileById()));
@@ -102,6 +110,7 @@ void  GDrive::read(const QString& filename){
    connect(this,SIGNAL(driveOperationFinished(const QVariant&)),&loop,SLOT(quit()));
    loop.exec();
 }
+
 void  GDrive::readFileById(){//authorize skipped
    disconnect(this, SIGNAL(intermediateOperationFinished()), this, SLOT(readFileById()));
    cout<<"GDrive::readFileById fQueriedFileId "<<fQueriedFileId<<endl;
@@ -121,6 +130,7 @@ void  GDrive::readFileById(){//authorize skipped
 	      this, SLOT(readReplyReceived(QNetworkReply  *)));
    }
 }
+
 void GDrive::readReplyReceived(QNetworkReply  *reply)
 {
    cout<<"readReplyReceived"<<endl;
@@ -269,8 +279,10 @@ void GDrive::queryReplyReceived(QNetworkReply  *reply)
 {
    disconnect(fNetManager, SIGNAL(finished(QNetworkReply  *)),
               this, SLOT(queryReplyReceived(QNetworkReply  *)));
-   QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-
+   cout<<"QRR "<<endl;
+   auto cont = reply->readAll();
+   QJsonDocument doc = QJsonDocument::fromJson(cont);
+   cout<<"Doc: "<<QString(cont)<<endl;
    QJsonObject obj=doc.object();
    if(obj.find("files")!=obj.end()){
       QJsonValue val=obj.find("files").value();
