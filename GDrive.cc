@@ -67,15 +67,9 @@ void GDrive::Start()
 
 void GDrive::checkExpireTime()
 {
-   cout << "GDrive::checkExpireTime() " <<setprecision(12)<< accessTokenExpireTime()
+   cout << "GDrive::checkExpireTime() " <<setprecision(12) << accessTokenExpireTime()
         << ' ' << QDateTime::currentDateTimeUtc().toTime_t()
-        << ' ' << QDateTime::currentDateTime().toTime_t()
-	<< ' ' << QDateTime::currentSecsSinceEpoch()  
-	<<" Left: "<<(long int)(QDateTime::currentDateTimeUtc().toTime_t()) - accessTokenExpireTime()<< endl;
-   time_t t0 =   QDateTime::currentDateTimeUtc().toTime_t();
-   time_t t1 =   QDateTime::currentDateTime().toTime_t();
-   time_t t2 =   QDateTime::currentSecsSinceEpoch();
-   cout<<ctime(&t0)<<ctime(&t1)<<ctime(&t2);
+	<<" Left: "<<accessTokenExpireTime() - (double)(QDateTime::currentDateTimeUtc().toTime_t()) << endl;
    if(accessTokenExpireTime() <= QDateTime::currentDateTimeUtc().toTime_t()) {
       requestNewAccessToken();
    } else emit(authorizationObtained());
