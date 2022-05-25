@@ -13,6 +13,7 @@
 #include <QWebPage>
 #include <QWebElement>
 #include <QWebFrame>
+#include <stdio.h>
 
 using namespace std;
 
@@ -20,6 +21,27 @@ void
 Lingvo::fetch(QString query)
 {
     fQuery = query;
+    {
+        std::string com = "lynx -dump https://www.lingvolive.com/en-us/translate/de-ru/\""+fQuery.toStdString()+"\"";
+        cout<<"Runnnig com "<<com<<endl;
+        auto F = popen(com.c_str(),"r");
+        std::string ret;
+        char chret[101];
+        int bytes_read;
+        while((bytes_read = fread(chret, 1, 100, F)) == 100)
+        {
+            chret[bytes_read]='\0';
+            ret+=chret;
+        }
+        cout<<"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Got from Lynx "<<endl<<ret<<endl;
+        int status = pclose(F);
+        cout<<"Exit status = "<<status<<endl;
+        fHTML = qstr(ret);
+        fGotReply = true;
+        parseHTML();
+        return;
+    }
+    
     if(socket) delete socket;
     socket = new QTcpSocket(this);
 
