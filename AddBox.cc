@@ -131,11 +131,14 @@ void AddBox::reFetch()
       return;
    }
 
+   setEnabled(false);
+   cout<<"Disabled : "<<isEnabled()<<endl;
+
    connect(q, SIGNAL(ready(OnlineDict*)), this, SLOT(receiveWord(OnlineDict *)));
    connect(q, SIGNAL(error(OnlineDict*)), this, SLOT(receiveWord(OnlineDict *)));
    q->fetch(QString::fromUtf8(page()->dictEntry().words().first->data().c_str()));
 
-   setEnabled(false);
+
    emit waitForNetRequest();
 }
 
@@ -151,6 +154,7 @@ void AddBox::receiveWord(OnlineDict *q)
 {
    emit netRequestReceived();
    setEnabled(true);
+   cout<<"Enabled : "<<isEnabled()<<endl;
 
    string tag=page()->dictEntry().tags();
    list<TDictEntry *> lst=q->getAll();

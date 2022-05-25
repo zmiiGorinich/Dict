@@ -260,13 +260,20 @@ Lingvo::parseHTML()
             forms += lines[il] + '\n';
     }
 
+    fCF.resize(articles.size());
+    for(auto & f : fCF)
+    {
+        f = new LingvoCardParser(this);
+    }
+
+    auto it = fCF.begin();
     for(auto & art : articles)
     {
         cout << "Lingvo ---------------- " << endl;
-        fCF.push_back(new LingvoCardParser(this));
-        fCF.back()->parseElement(art + forms);
+        (*it)->parseElement(art + forms);
+        it++;
     }
-
+    
     cout << "******** MATCH **************** " << endl;
     TDictEntry *me = getMatch();
     if(me) cout << *me << endl;
@@ -279,10 +286,13 @@ Lingvo::parseHTML()
 void
 Lingvo::parserDone()
 {
-    cout << "ParserDone Lingvo" << endl;
+    cout << "ParserDone Lingvo" <<fCF.size()<< endl;
     for(auto ep : fCF)
     {
         cout << "PD " << ep->isDone() << endl;
+    }
+    for(auto ep : fCF)
+    {
         if(!ep->isDone()) return;
     }
 
